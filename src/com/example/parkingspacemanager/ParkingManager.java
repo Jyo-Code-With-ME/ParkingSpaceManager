@@ -28,7 +28,7 @@ public class ParkingManager {
         System.out.print("License plate: ");
 
         // Reading the license plate from the user
-        String licensePlate = scanner.nextLine().trim();
+        String licensePlate = scanner.nextLine().trim().toUpperCase();
 
         // Checking whether the license plate is empty
         if (licensePlate.isBlank()) {
@@ -203,7 +203,7 @@ public class ParkingManager {
         System.out.println("\n--- Exit Vehicle & Pay ---");
 
         System.out.print("License plate: ");
-        String licensePlate = scanner.nextLine().trim();
+        String licensePlate = scanner.nextLine().trim().toUpperCase();
 
         // Finding the parking spot containing this vehicle
         ParkingSpot spot = parkingLot.findVehicle(licensePlate);
@@ -254,15 +254,8 @@ public class ParkingManager {
             return;
         }
 
-        // Creating a Payment object.
-        Payment payment =
-                new Payment(
-                        hours,
-                        vehicle,
-                        paymentMethod);
-
-        // Calling processPayment() on the Payment object
-        if (!payment.processPayment()) {
+        // Validate the payment method BEFORE calculating any amount.
+        if (!paymentMethod.validate()) {
 
             System.out.println("Payment failed.");
 
@@ -270,6 +263,24 @@ public class ParkingManager {
 
             return;
         }
+
+         // Only now do we create the Payment object and calculate the fee,
+         // since we already know the payment method is valid.
+        Payment payment =
+                new Payment(
+                        hours,
+                        vehicle,
+                        paymentMethod);
+
+       /* // Calling processPayment() on the Payment object
+        if (!payment.processPayment()) {
+
+            System.out.println("Payment failed.");
+
+            System.out.println("Please check your payment details.");
+
+            return;
+        }*/
 
         System.out.printf("\nPayment successful! Amount: $%.2f%n", payment.getAmount());
 
@@ -305,8 +316,7 @@ public class ParkingManager {
         System.out.println("2. Debit Card");
 
         System.out.print("Choose payment method: ");
-        String choice =
-                scanner.nextLine().trim();
+        String choice = scanner.nextLine().trim();
 
         if (choice.equals("1")) {
 

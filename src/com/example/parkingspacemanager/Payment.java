@@ -50,13 +50,6 @@ public class Payment {
         this.amount = hours * HOURLY_RATE * vehicle.getRateMultiplier();
     }
 
-    // Processes the payment
-    public boolean processPayment() {
-
-        // Calling validate() on the payment method object
-        return paymentMethod.validate();
-    }
-
     // Getter for amount
     public double getAmount() {
         return amount;
