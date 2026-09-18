@@ -1,4 +1,0 @@
-2026-09-17T18:55:16.471631 - Vehicle 987897 (Car) parked in space 1
-2026-09-17T20:01:27.995441300 - Vehicle 7897897890123456 (Car) parked in space 1
-2026-09-17T20:04:59.426610900 - Vehicle 78978978901234444 (Truck) parked in space 2
-2026-09-17T20:11:35.084428 - Vehicle 7897897890123456 exited space 1 - Parking time: 1.0 hours - Payment: $5.00 - Method: Debit Card
