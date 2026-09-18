@@ -1,4 +1,4 @@
-package com.example.parkingspacemanager;
+package com.parkingspacemanager;
 
 import java.util.Scanner;
 
@@ -43,7 +43,7 @@ public class ParkingSpaceApplicationMain {
                 case "2" -> parkingManager.viewAvailableSpots();
 
                 // Calling exitVehicleAndPay() method
-                case "3" -> parkingManager.exitVehicleAndPay(scanner);
+                case "3" -> parkingManager.payAndExit(scanner);
 
                 // Calling viewParkingHistory() method
                 case "4" -> parkingManager.viewParkingHistory();
@@ -75,7 +75,7 @@ public class ParkingSpaceApplicationMain {
         System.out.println("------------- MENU -------------");
         System.out.println("1. Park Vehicle");
         System.out.println("2. View Available Spots");
-        System.out.println("3. Exit Vehicle & Pay");
+        System.out.println("3. Pay & Exit From Parking Lot");
         System.out.println("4. View Parking History");
         System.out.println("5. Help");
         System.out.println("6. Exit");

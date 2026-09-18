@@ -1,4 +1,4 @@
-package com.example.parkingspacemanager;
+package com.parkingspacemanager;
 
 
 // CreditCardPayment implements the PaymentMethod interface

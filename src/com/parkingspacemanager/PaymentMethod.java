@@ -1,4 +1,4 @@
-package com.example.parkingspacemanager;
+package com.parkingspacemanager;
 
 // Interface defines what a payment method must provide.
 public interface PaymentMethod {

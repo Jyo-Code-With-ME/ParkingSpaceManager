@@ -1,4 +1,4 @@
-package com.example.parkingspacemanager;
+package com.parkingspacemanager;
 
 // DebitCardPayment implements PaymentMethod
 public final class DebitCardPayment implements PaymentMethod {
@@ -13,7 +13,6 @@ public final class DebitCardPayment implements PaymentMethod {
         this.cardNumber = cardNumber;
 
     }
-
 
     // Implementation of interface method
     @Override
