@@ -18,7 +18,7 @@ public class Payment {
     private final double amount;
 
     // Constructor
-    public Payment(double hours,Vehicle vechile PaymentMethod paymentMethod) {
+    public Payment(double hours,Vehicle vehicle ,PaymentMethod paymentMethod) {
 
         // Validate hours
         if (hours <= 0) {

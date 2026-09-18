@@ -259,8 +259,7 @@ public class ParkingManager {
                 new Payment(
                         hours,
                         vehicle,
-                        paymentMethod
-                );
+                        paymentMethod);
 
         // Calling processPayment() on the Payment object
         if (!payment.processPayment()) {
