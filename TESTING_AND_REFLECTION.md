@@ -1,4 +1,4 @@
-# Part E — Testing Strategy (≤200 words)
+# Testing Strategy 
 
 Testing for this project was done through structured **manual CLI
 walkthroughs** covering both happy paths and error paths, since the
@@ -30,7 +30,7 @@ input, by separating input-reading from business logic in
 
 ---
 
-# Part F — Reflection (200–400 words)
+# Reflection
 
 **Biggest design trade-off.** The largest trade-off was choosing a
 simple append-only log file (`FileManager`) over reloading full
