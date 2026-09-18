@@ -1,3 +1,4 @@
+
 # Parking Space Manager
 
 A console-based parking lot management system built in Java, built as an
@@ -192,3 +193,4 @@ parking_history.txt
 
 **Known vehicle types:** Car (1.0x rate), Truck (1.5x rate), Motorcycle (0.5x rate).
 **Known payment methods:** Credit Card, Debit Card (both require a 16-digit card number).
+
