@@ -1,6 +1,6 @@
 package com.parkingspacemanager;
 
-
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,15 +43,15 @@ public final class ParkingLot {
     }
 
     // Finds the first available parking spot
-    public ParkingSpot findAvailableSpot() {
+    public Optional <ParkingSpot> findAvailableSpot() {
 
         for (ParkingSpot spot : parkingSpots) {
             if (spot.getVehicle() == null) {
-                return spot;
+                return Optional.of(spot);
             }
         }
         // No available spot
-        return null;
+        return Optional.empty();
     }
 
     // Parks a vehicle in an available spot
@@ -61,28 +61,23 @@ public final class ParkingLot {
             return false;
         }
 
-        // Check if vehicle is already parked
-        if (findVehicle(vehicle.getLicensePlate()) != null) {
-            return false;
-        }
-
         // Find an available spot
-        ParkingSpot spot = findAvailableSpot();
+        Optional<ParkingSpot> spot = findAvailableSpot();
 
-        if (spot == null) {
+        if (spot.isEmpty()) {
             return false;
         }
 
         // Store the Vehicle object inside the ParkingSpot
-        spot.setVehicle(vehicle);
+        spot.get().setVehicle(vehicle);
         return true;
     }
 
     // Finds a vehicle using its license plate
-    public ParkingSpot findVehicle(String licensePlate) {
+    public Optional<ParkingSpot> findVehicle(String licensePlate) {
 
         if (licensePlate == null || licensePlate.isBlank()) {
-            return null;
+            return Optional.empty();
         }
 
         for (ParkingSpot spot : parkingSpots) {
@@ -94,24 +89,24 @@ public final class ParkingLot {
                     vehicle.getLicensePlate()
                             .equalsIgnoreCase(licensePlate)) {
 
-                return spot;
+                return Optional.of(spot);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     // Removes a vehicle from the parking lot
     public boolean removeVehicle(String licensePlate) {
 
-        ParkingSpot spot = findVehicle(licensePlate);
+        Optional<ParkingSpot> spot = findVehicle(licensePlate);
 
-        if (spot == null) {
+        if (spot.isEmpty()) {
             return false;
         }
 
         // Remove the Vehicle object
-        spot.setVehicle(null);
+        spot.get().setVehicle(null);
         return true;
     }
 

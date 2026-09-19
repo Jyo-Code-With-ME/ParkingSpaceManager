@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.Optional;
 
 public class ParkingManager {
 
@@ -30,7 +31,7 @@ public class ParkingManager {
             return;
         }
 
-        if (parkingLot.findVehicle(licensePlate) != null) {
+        if (parkingLot.findVehicle(licensePlate).isPresent()) {
             System.out.println(
                     "Error: This vehicle is already parked."
             );
@@ -56,9 +57,9 @@ public class ParkingManager {
             return;
         }
 
-        ParkingSpot spot = parkingLot.findAvailableSpot();
+     Optional<ParkingSpot> availableSpot = parkingLot.findAvailableSpot();
 
-        if (spot == null) {
+        if (availableSpot.isEmpty()) {
             System.out.println(
                     "Sorry, the parking lot is full."
             );
@@ -72,6 +73,7 @@ public class ParkingManager {
             return;
         }
 
+        ParkingSpot spot = availableSpot.get();
         spot.setEntryTime(LocalDateTime.now());
 
         System.out.println("\nVehicle parked successfully!");
@@ -92,44 +94,31 @@ public class ParkingManager {
         );
     }
 
+
     private Vehicle createVehicle(
             Scanner scanner,
             String licensePlate,
             String brandModel) {
 
-        String type = parkingInput.chooseVehicleType(scanner);
+        String typeCode = parkingInput.chooseVehicleType(scanner);
 
-        Vehicle vehicle;
+        VehicleType vehicleType = VehicleType.fromMenuCode(typeCode);
 
-        switch (type) {
-
-            case "1":
-                vehicle = new Vehicle.Car(
-                        licensePlate,
-                        brandModel
-                );
-                break;
-
-            case "2":
-                vehicle = new Vehicle.Truck(
-                        licensePlate,
-                        brandModel
-                );
-                break;
-
-            case "3":
-                vehicle = new Vehicle.Motorcycle(
-                        licensePlate,
-                        brandModel
-                );
-                break;
-
-            default:
-                System.out.println(
-                        "Error: Invalid vehicle type."
-                );
-                return null;
+        if (vehicleType == null) {
+            System.out.println(
+                    "Error: Invalid vehicle type."
+            );
+            return null;
         }
+
+        // Switch expression: the compiler requires every VehicleType
+        // constant to be handled here - if a new type is added to the
+        // enum without updating this switch, the code won't compile.
+        Vehicle vehicle = switch (vehicleType) {
+            case CAR -> new Vehicle.Car(licensePlate, brandModel);
+            case TRUCK -> new Vehicle.Truck(licensePlate, brandModel);
+            case MOTORCYCLE -> new Vehicle.Motorcycle(licensePlate, brandModel);
+        };
 
         double hourlyRate =
                 BASE_HOURLY_RATE
@@ -191,16 +180,16 @@ public class ParkingManager {
         String licensePlate =
                 parkingInput.getLicensePlate(scanner);
 
-        ParkingSpot spot =
-                parkingLot.findVehicle(licensePlate);
+        Optional<ParkingSpot> spotResult = parkingLot.findVehicle(licensePlate);
 
-        if (spot == null) {
+        if (spotResult .isEmpty()) {
             System.out.println(
                     "Error: Vehicle not found."
             );
             return;
         }
 
+        ParkingSpot spot = spotResult.get();
         Vehicle vehicle = spot.getVehicle();
 
         LocalDateTime entryTime =
@@ -262,6 +251,7 @@ public class ParkingManager {
 
         Payment payment = new Payment(
                 hours,
+                BASE_HOURLY_RATE,
                 vehicle,
                 paymentMethod
         );

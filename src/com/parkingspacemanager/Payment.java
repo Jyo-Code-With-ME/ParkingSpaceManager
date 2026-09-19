@@ -3,22 +3,12 @@ package com.parkingspacemanager;
 
 public class Payment {
 
-    // Constant hourly parking rate.
-    // static = belongs to the class.
-    // final = cannot be changed.
-    private static final double HOURLY_RATE = 5.00;
-
-    // Stores number of parking hours
     private final double hours;
-
-    // Stores the selected payment method
     private final PaymentMethod paymentMethod;
-
-    // Stores the calculated payment amount
     private final double amount;
 
     // Constructor
-    public Payment(double hours,Vehicle vehicle ,PaymentMethod paymentMethod) {
+    public Payment(double hours,double baseHourlyRate,Vehicle vehicle ,PaymentMethod paymentMethod) {
 
         // Validate hours
         if (hours <= 0) {
@@ -47,7 +37,7 @@ public class Payment {
          // vehicle.getRateMultiplier() - polymorphic call: the actual
         // value returned depends on the vehicle's real runtime type
         // (Car, Truck, or Motorcycle), resolved via dynamic dispatch.
-        this.amount = hours * HOURLY_RATE * vehicle.getRateMultiplier();
+        this.amount = hours * baseHourlyRate * vehicle.getRateMultiplier();
     }
 
     // Getter for amount

@@ -119,7 +119,7 @@ classDiagram
 | Abstraction | `PaymentMethod` interface, `Vehicle` abstract class | Callers depend only on *what* a type does, not *how* |
 | Encapsulation | Private fields + getters throughout; `ParkingLot.getParkingSpots()` returns an unmodifiable view | Internal state can't be mutated from outside without going through controlled methods |
 | Inheritance | `Vehicle` → `Car`, `Truck`, `Motorcycle` | Shared fields (`licensePlate`, `brandModel`) and shared getters live once, in the parent |
-| Polymorphism | `Payment` constructor calls `vehicle.getRateMultiplier()`; `Payment.processPayment()` calls `paymentMethod.validate()` | Same call site resolves to different behavior depending on the object's real runtime type |
+| Polymorphism | `Payment` constructor calls `vehicle.getRateMultiplier()`;  calls `paymentMethod.validate()` | Same call site resolves to different behavior depending on the object's real runtime type |
 | Interfaces (multi-impl) | `PaymentMethod` → `CreditCardPayment`, `DebitCardPayment` | `Payment` is written once against the interface |
 | `final` usage | `CreditCardPayment`, `DebitCardPayment`, `FileManager`, `ParkingLot`, `Payment`, `Car`, `Truck`, `Motorcycle`; `HOURLY_RATE` constant | Protects invariants / documents "not meant to be extended" |
 | Design pattern | Simple Factory (`ParkingManager.createVehicle`, `ParkingManager.choosePaymentMethod`) | See rationale below |

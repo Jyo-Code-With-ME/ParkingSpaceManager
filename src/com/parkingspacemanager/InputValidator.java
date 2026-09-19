@@ -1,6 +1,6 @@
 package com.parkingspacemanager;
 
-public class InputValidator {
+public final class InputValidator {
     private InputValidator() {
     }
 

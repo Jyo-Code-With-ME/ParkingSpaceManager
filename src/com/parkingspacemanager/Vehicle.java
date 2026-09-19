@@ -17,12 +17,12 @@ public abstract class Vehicle {
         this.licensePlate = licensePlate;
         this.brandModel = brandModel;
     }
-
-    public String getLicensePlate() {
+    // final keyword
+    public  final String getLicensePlate() {
         return licensePlate;
     }
 
-    public String getBrandModel() {
+    public final  String getBrandModel() {
         return brandModel;
     }
 

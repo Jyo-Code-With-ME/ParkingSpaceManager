@@ -4,14 +4,12 @@ import java.time.LocalDateTime;
 
 public class ParkingSpot {
 
-  /* This class maily handles with one individual parking space
-    Here I am implemneting Encapsulation using private access modifer
-    and getter and setter methods
-    */
-
     // Constructor
     public ParkingSpot(int spaceNumber) {
-        // this.spaceNumber refers to the class variable
+
+        if(spaceNumber<=0){
+            throw new IllegalArgumentException("Space number be greater");
+        }
         // spaceNumber refers to the constructor parameter
         this.spaceNumber = spaceNumber;
 
